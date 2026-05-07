@@ -1,0 +1,28 @@
+# Attention module comparison under the same HR-FPN structure.
+
+common:
+  data: configs/tomato_pose.yaml
+  pretrained: yolo11n-pose.pt
+  epochs: 150
+  imgsz: 768
+  batch: 16
+  device: 0
+  workers: 0
+  project: Tomato_Pose_Runs_v3_Attention
+
+experiments:
+  - name: B0_HR_no_attention
+    model: models/attention_compare/yolo11n-pose-hr-none.yaml
+    lambda_geo: 0.0
+
+  - name: B1_HR_SimAM
+    model: models/attention_compare/yolo11n-pose-hr-simam.yaml
+    lambda_geo: 0.0
+
+  - name: B2_HR_ECA
+    model: models/attention_compare/yolo11n-pose-hr-eca.yaml
+    lambda_geo: 0.0
+
+  - name: B3_HR_TCA
+    model: models/attention_compare/yolo11n-pose-hr-tca.yaml
+    lambda_geo: 0.0

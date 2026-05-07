@@ -1,0 +1,22 @@
+# Geometry consistency loss weight ablation.
+
+common:
+  data: configs/tomato_pose.yaml
+  pretrained: yolo11n-pose.pt
+  model: models/yolo11n-pose-tomato-v3.yaml
+  epochs: 250
+  imgsz: 768
+  batch: 16
+  device: 0
+  workers: 0
+  project: Tomato_Pose_Runs_v3_GeoLambda
+
+experiments:
+  - name: C0_lambda_0_00
+    lambda_geo: 0.00
+  - name: C1_lambda_0_03
+    lambda_geo: 0.03
+  - name: C2_lambda_0_05
+    lambda_geo: 0.05
+  - name: C3_lambda_0_10
+    lambda_geo: 0.10

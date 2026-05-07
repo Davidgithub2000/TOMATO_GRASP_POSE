@@ -1,0 +1,43 @@
+# Comparison experiments.
+# Non-YOLO models such as RTMPose/HRNet require MMPose and COCO-format labels.
+# This config keeps YOLO-family models runnable from the current package.
+
+common:
+  data: configs/tomato_pose.yaml
+  epochs: 1
+  imgsz: 768
+  batch: 16
+  device: 0
+  workers: 0
+  project: Tomato_Pose_Runs_v3_Compare
+
+experiments:
+  - name: D0_YOLO11n_pose
+    model: yolo11n-pose.pt
+    pretrained:
+    lambda_geo: 0.0
+
+  - name: D1_YOLO11s_pose
+    model: yolo11s-pose.pt
+    pretrained:
+    lambda_geo: 0.0
+
+  - name: D2_YOLOv8n_pose
+    model: yolov8n-pose.pt
+    pretrained:
+    lambda_geo: 0.0
+
+  - name: D3_YOLOv8s_pose
+    model: yolov8s-pose.pt
+    pretrained:
+    lambda_geo: 0.0
+
+  - name: D4_v2_P2_SimAM
+    model: models/attention_compare/yolo11n-pose-hr-simam.yaml
+    pretrained: yolo11n-pose.pt
+    lambda_geo: 0.0
+
+  - name: D5_TomatoPose_YOLO11_v3
+    model: models/yolo11n-pose-tomato-v3.yaml
+    pretrained: yolo11n-pose.pt
+    lambda_geo: 0.03

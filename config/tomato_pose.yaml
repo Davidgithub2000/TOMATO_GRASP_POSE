@@ -1,0 +1,23 @@
+# Tomato 4-keypoint pose dataset.
+# Modify "path" to your real dataset root. The root should contain images/ and labels/.
+path: C:/Users/mechrevo/Desktop/yolo11_tomato_pose_improvement
+
+train: images/train
+val: images/val
+test: images/test
+
+nc: 1
+names:
+  0: tomato
+
+# Keypoints:
+# 0 tomato_calyx, 1 tomato_bottom, 2 tomato_left, 3 tomato_right
+kpt_shape: [4, 3]
+flip_idx: [0, 1, 3, 2]
+
+kpt_names:
+  0:
+    - tomato_calyx
+    - tomato_bottom
+    - tomato_left
+    - tomato_right

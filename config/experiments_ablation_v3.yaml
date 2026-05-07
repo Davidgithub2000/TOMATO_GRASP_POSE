@@ -1,0 +1,53 @@
+# 2^3 factorial ablation for TomatoPose-YOLO11-v3.
+# M1 = HR-FPN + FeatureBalance, M2 = TomatoCA, M3 = Tomato Geometry Consistency loss.
+
+common:
+  data: configs/tomato_pose.yaml
+  pretrained: yolo11n-pose.pt
+  epochs: 300
+  imgsz: 768
+  batch: 16
+  device: 0
+  workers: 0
+  project: Tomato_Pose_Runs_v3_Ablation
+
+experiments:
+  - name: A0_baseline_yolo11n_pose
+    model: yolo11n-pose.pt
+    lambda_geo: 0.0
+    note: "Baseline YOLO11n-pose."
+
+  - name: A1_M1_HRFB
+    model: models/yolo11n-pose-hrfb.yaml
+    lambda_geo: 0.0
+    note: "M1 only: high-resolution P2 branch and FeatureBalance."
+
+  - name: A2_M2_TCA
+    model: models/yolo11n-pose-tca.yaml
+    lambda_geo: 0.0
+    note: "M2 only: TomatoCA on P3/P4/P5."
+
+  - name: A3_M3_TGC
+    model: yolo11n-pose.pt
+    lambda_geo: 0.03
+    note: "M3 only: tomato geometry consistency loss."
+
+  - name: A4_M1_M2_HRFB_TCA
+    model: models/yolo11n-pose-tomato-v3.yaml
+    lambda_geo: 0.0
+    note: "M1 + M2."
+
+  - name: A5_M1_M3_HRFB_TGC
+    model: models/yolo11n-pose-hrfb.yaml
+    lambda_geo: 0.03
+    note: "M1 + M3."
+
+  - name: A6_M2_M3_TCA_TGC
+    model: models/yolo11n-pose-tca.yaml
+    lambda_geo: 0.03
+    note: "M2 + M3."
+
+  - name: A7_TomatoPose_HRFB_TCA_TGC
+    model: models/yolo11n-pose-tomato-v3.yaml
+    lambda_geo: 0.03
+    note: "Full model: M1 + M2 + M3."
